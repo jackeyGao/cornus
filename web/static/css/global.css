@@ -1,0 +1,88 @@
+body {
+    background: url('../images/bg.png');
+    font-family: "STKaiti","KaiTi","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.main-top {
+    height: 150px;
+}
+
+#menu .item {
+    border-left: 3px solid #704d4e;
+    padding: 1em;
+    text-align: center;
+}
+
+#menu .item:hover {
+    background-color: #704d4e;
+    color: #fff;
+}
+
+#menu .item .title {
+    font-size: 20px;
+}
+
+#menu .item .description {
+    font-size: 12px;
+}
+
+.dl-wrapper {
+    border: 1px solid #cccccc;
+    padding: 3px;
+}
+
+.dl-left {
+    border: 1px solid #cccccc;
+    height: 200px;
+    width: 50px;
+}
+
+.menu {
+    padding: 1em;
+}
+
+
+.today-wrapper {
+    border-left: 1px solid #f3f3f4;
+}
+
+.today-wrapper .top, .today-wrapper .body, .today-wrapper .footer {
+    height: 20px;
+    background-color: #704d4e;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+}
+
+.today-wrapper .top {
+    height: 20px;
+}
+
+.uu {
+    writing-mode: vertical-rl;
+    -moz-writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+    -o-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    _writing-mode: tb-rl;
+}
+
+.tag {
+    background-color: #fff;
+    padding: 2em .8em;
+    border: 1px solid #f3f3f4;
+}
+
+.tag:hover {
+    background-color: #704d4e;
+    color: #fff;
+}
+
+.today-wrapper .body {
+    padding: 1em;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: start;
+    overflow:auto;
+    min-height: 300px;
+    max-height: 500px;
+}
