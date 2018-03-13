@@ -8,7 +8,7 @@
     </head>
     <body style="width: 100%;">
         <div class="ui grid">
-            <div class="ten wide column">
+            <div class="sixteen wide column" style="position: fixed; top: 0; right: 0;">
                 <div class="main-top">
                     <div id="menu" class="ui grid">
                         <div class="four wide column"></div>
@@ -37,29 +37,33 @@
                             </div>
                         </div>
                     </div>
+                    <div class="ui divider"></div>
                 </div>
+            </div>
+            <div class="twelve wide column">
                 <div class="menu">
                     <div class="category">
-                        <h3 class="ui header">季节</h3>
+                        {% for category, tags in categorys.items %}
+                        <h3 class="ui header">{{ category.name }}</h3>
                         <div class="ui ten column grid">
-                            <div class="column uu"><div class="tag">春天</div></div>
-                            <div class="column uu"><div class="tag">夏天</div></div>
-                            <div class="column uu"><div class="tag">秋天</div></div>
-                            <div class="column uu"><div class="tag">冬天</div></div>
+                            {% for tag in tags %}
+                            <div class="column uu"><div class="tag">{{ tag }}</div></div>
+                            {% endfor %}
                         </div>
-                        <h3 class="ui header">寒窗</h3>
+                        {% endfor %}
+                        {% for category, tags in categorys.items %}
+                        <h3 class="ui header">{{ category.name }}</h3>
                         <div class="ui ten column grid">
-                            <div class="column uu"><div class="tag">一年级上册</div></div>
-                            <div class="column uu"><div class="tag">一年级下册</div></div>
-                            <div class="column uu"><div class="tag">二年级上册</div></div>
-                            <div class="column uu"><div class="tag">小雅·南有嘉鱼之什</div></div>
+                            {% for tag in tags %}
+                            <div class="column uu"><div class="tag">{{ tag }}</div></div>
+                            {% endfor %}
                         </div>
-
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            <div class="six wide column" style="padding: 1em;">
-                <table style="height: 100%; border-left: 1px solid #f3f3f4;">
+            <div class="four wide column" style="padding: 1em; position: fixed; right: 0; top: 0;">
+                <table style="height: 100%;">
                     <tr>
                         <td>
                         <div class="today-wrapper">

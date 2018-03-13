@@ -43,7 +43,6 @@ body {
 
 
 .today-wrapper {
-    border-left: 1px solid #f3f3f4;
 }
 
 .today-wrapper .top, .today-wrapper .body, .today-wrapper .footer {
@@ -70,6 +69,8 @@ body {
     background-color: #fff;
     padding: 2em .8em;
     border: 1px solid #f3f3f4;
+    min-height: 100px;
+    text-align: center;
 }
 
 .tag:hover {
@@ -81,8 +82,9 @@ body {
     padding: 1em;
     font-size: 24px;
     line-height: 30px;
+    letter-spacing: 8px;
     text-align: start;
     overflow:auto;
-    min-height: 300px;
-    max-height: 500px;
+    min-height: 450px;
+    max-height: 600px;
 }
