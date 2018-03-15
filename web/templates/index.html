@@ -1,84 +1,42 @@
-<html>
-    <head>
-        <title>
-            若邻
-        </title>
-        <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/semantic.min.css" rel="stylesheet">
-        <link href="/static/css/global.css" rel="stylesheet">
-    </head>
-    <body style="width: 100%;">
-        <div class="ui grid">
-            <div class="sixteen wide column" style="position: fixed; top: 0; right: 0;">
-                <div class="main-top">
-                    <div id="menu" class="ui grid">
-                        <div class="four wide column"></div>
-                        <div class="three wide column">
-                            <div class="item">
-                                <div class="title">首页</div>
-                                <div class="description">HOME</div>
-                            </div>
-                        </div>
-                        <div class="three wide column">
-                            <div class="item">
-                                <div class="title">诗集</div>
-                                <div class="description">LIST</div>
-                            </div>
-                        </div>
-                        <div class="three wide column">
-                            <div class="item">
-                                <div class="title">发现</div>
-                                <div class="description">DISCOVRY</div>
-                            </div>
-                        </div>
-                        <div class="three wide column">
-                            <div class="item">
-                                <div class="title">关于</div>
-                                <div class="description">ABOUT</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui divider"></div>
-                </div>
-            </div>
-            <div class="twelve wide column">
-                <div class="menu">
-                    <div class="category">
-                        {% for category, tags in categorys.items %}
-                        <h3 class="ui header">{{ category.name }}</h3>
-                        <div class="ui ten column grid">
-                            {% for tag in tags %}
-                            <div class="column uu"><div class="tag">{{ tag }}</div></div>
-                            {% endfor %}
-                        </div>
-                        {% endfor %}
-                        {% for category, tags in categorys.items %}
-                        <h3 class="ui header">{{ category.name }}</h3>
-                        <div class="ui ten column grid">
-                            {% for tag in tags %}
-                            <div class="column uu"><div class="tag">{{ tag }}</div></div>
-                            {% endfor %}
-                        </div>
-                        {% endfor %}
+{% extends "base.html" %}
+{% block title %}主页{% endblock %}
+{% block content %}
+    <div class="six wide column" style="padding: 1em;">
+        <div class="index-left">
+            <div class="ui icon black large circular button" style="margin-bottom: -1.35714286em; z-index: 1000;" onclick="$('.today-wrapper .body').toggleClass('uu')">今</div>
+            <div class="today-wrapper" style="text-align: center;">
+                <div class="body uu kaiti">
+                    君不见，黄河之水天上来，<br/>奔流到海不复回。<br/>
+                    君不见，高堂明镜悲白发，<br/>朝如青丝暮成雪！<br/>
+                    人生得意须尽欢，莫使金樽空对月。<br/>
+                    天生我材必有用，千金散尽还复来。<br/>
+                    烹羊宰牛且为乐，会须一饮三百杯。<br/>
+                    岑夫子，丹丘生，将进酒，杯莫停。<br/>
+                    与君歌一曲，请君为我倾耳听。<br/>
+                    钟鼓馔玉不足贵，但愿长醉不复醒。<br/>
+                    古来圣贤皆寂寞，惟有饮者留其名。<br/>
+                    陈王昔时宴平乐，斗酒十千恣欢谑。<br/>
+                    主人何为言少钱，径须沽取对君酌。<br/>
+                    五花马、千金裘，呼儿将出换美酒，<br/>与尔同销万古愁！<br/>
+                    <div class="meta">
+                        <span class="title">将进酒  李白</span>
                     </div>
                 </div>
             </div>
-            <div class="four wide column" style="padding: 1em; position: fixed; right: 0; top: 0;">
-                <table style="height: 100%;">
-                    <tr>
-                        <td>
-                        <div class="today-wrapper">
-                            <div class="top">
-                            </div>
-                            <div class="body uu">
-                                流水落花春去也，<br/>
-                                天上人间。<br/>
-                            </div>
-                            <div class="footer">
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
-                </table>
-            <div>
-    </body>
-</html>
+        </div>
+    </div>
+    <div class="ten wide column">
+        <div id="menutag">
+            <div class="category">
+                <h3 class="ui header">通用</h3>
+                <div class="ui twelve column grid">
+                    {% for tag in tags %}
+                    <a href="/list/{{ tag.name }}/">
+                        <div class="column uu kaiti"><div class="tag">{{ tag.name }}</div></div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

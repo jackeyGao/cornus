@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>{% block title %}Cornus{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/semantic.min.css" rel="stylesheet">
+        <link href="/static/css/global.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main-top" style="position: fixed; top: 0; right:0; left:0; z-index: 100;background-color: #fff;">
+            <div id="menu-bar" onclick="$('#menu').toggle();" class="ui icon grey button"><i class="list icon"></i></div>
+            <div id="menu" class="ui stackable pointing top fixed menu">
+                <div class="item">
+                </div>
+                <a class="item" href="/">
+                    <div class="title">首页</div>
+                </a>
+                <div class="item">
+                    <div class="title">诗集</div>
+                </div>
+                <div class="item">
+                    <div class="title">关于</div>
+                </div>
+                <div class="right menu">
+                    <div class="item">
+                        <div class="ui transparent input" style="border-radius: 0;">
+                            <input class="kaiti" style="border-radius: 0;" type="text" placeholder="关键字">
+                            <i class="search link icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div id="menu" class="ui equal width stackable grid">
+                <div class="five wide column"></div>
+                <div class="two wide column">
+                    <a href="/">
+                        <div class="item">
+                            <div class="title">首页</div>
+                            <div class="description">HOME</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="two wide column">
+                    <div class="item">
+                        <div class="title">诗集</div>
+                        <div class="description">LIST</div>
+                    </div>
+                </div>
+                <div class="two wide column">
+                    <div class="item">
+                        <div class="title">关于</div>
+                        <div class="description">ABOUT</div>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <div class="item">
+                        <div class="ui fluid icon input" style="border-radius: 0;">
+                            <input class="kaiti" style="border-radius: 0;" type="text" placeholder="关键字">
+                            <i class="inverted circular search link icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        -->
+            <div class="ui divider" style="margin: 0;"></div>
+        </div>
+        <div id="container" class="ui equal width stackable grid">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    {% block script %}{% endblock %}
+</html>

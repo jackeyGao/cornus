@@ -1,29 +1,35 @@
 body {
     background: url('../images/bg.png');
-    font-family: "STKaiti","KaiTi","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
-.main-top {
-    height: 150px;
+.kaiti {
+    font-family: "STKaiti","KaiTi","Microsoft YaHei","微软雅黑",Arial,sans-serif!important;
+}
+
+body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 2px;
+    height: 2px;
 }
 
 #menu .item {
-    border-left: 3px solid #704d4e;
-    padding: 1em;
     text-align: center;
-}
-
-#menu .item:hover {
-    background-color: #704d4e;
-    color: #fff;
+    padding: 1.5em;
+    width: 200px;
 }
 
 #menu .item .title {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 #menu .item .description {
     font-size: 12px;
+}
+
+
+.index-left {
+    float: right;
+    text-align:center;
 }
 
 .dl-wrapper {
@@ -37,23 +43,44 @@ body {
     width: 50px;
 }
 
-.menu {
-    padding: 1em;
+#container {
+    height: 100%;
+    padding-top: 100px;
 }
 
 
 .today-wrapper {
+    border: 1px solid #000;
+    padding: 5px;
 }
 
-.today-wrapper .top, .today-wrapper .body, .today-wrapper .footer {
-    height: 20px;
-    background-color: #704d4e;
-    border-bottom: 2px solid #fff;
-    color: #fff;
+.today-wrapper {
+    border: 1px solid #000;
+    padding: 5px;
 }
 
-.today-wrapper .top {
-    height: 20px;
+.today-wrapper:first-child {
+    margin-top: 0;
+}
+
+.today-wrapper .body {
+    border: 1px solid #cccccc;
+    color: #000;
+}
+
+.today-wrapper .body .content {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    overflow: auto;
+    max-width: 100%;
+}
+
+.today-wrapper .body .meta {
+    text-align: right;
+    color: #cccccc;
+    letter-spacing: 3px;
+    font-size: 14px;
 }
 
 .uu {
@@ -65,26 +92,142 @@ body {
     _writing-mode: tb-rl;
 }
 
-.tag {
+.forceleft {
+    text-align: left!important;
+}
+
+
+#menutag {
+    height: 100%;
+    overflow-y: auto;
+}
+
+#menutag .category .tag {
+    cursor: pointer;
     background-color: #fff;
     padding: 2em .8em;
     border: 1px solid #f3f3f4;
     min-height: 100px;
     text-align: center;
+    margin: 0.5em;
 }
 
-.tag:hover {
+#menutag .category .tag:hover {
     background-color: #704d4e;
     color: #fff;
 }
 
 .today-wrapper .body {
-    padding: 1em;
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: 8px;
+    padding: 1.5em 2em;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 5px;
     text-align: start;
-    overflow:auto;
-    min-height: 450px;
-    max-height: 600px;
+}
+
+.box-wrapper {
+    float: right;
+}
+
+.box-wrapper .top,.box-wrapper .middle, .box-wrapper .bottom  {
+    height: 20px;
+    background: #704d4e;
+    border-bottom: 2px solid #fff;
+}
+
+.box-wrapper .middle {
+    height: 350px; 
+    padding: 1.5em;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.poetry-wrapper .tags .tag {
+    border-left: 2px solid #cccccc;
+    padding: 0em 1em;
+    background: #f3f3f4;
+    margin: 0.5em 0em;
+    display: inline-block;
+}
+
+.poetry-wrapper .tags .tag:hover {
+    background: #704d4e;
+    color: #fff;
+}
+
+#menu-bar {
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#poetry-list {
+    text-align: center;
+    height: 100%;
+    overflow-y: auto;
+    padding: 0!important;
+}
+
+#tag-wrapper {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    #menu-bar {
+        display: block;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    .index-left {
+        width: 100%;
+    }
+
+    #menutag {
+        height: auto;
+        overflow: hidden;
+    }
+
+    .today-wrapper .body {
+        overflow: auto;
+        width: 100%;
+    }
+
+    #poetry-list {
+        width: 100%;
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .box-wrapper {
+        display: none;
+    }
+
+    #tag-wrapper {
+        display: table;
+    }
+
+    #tag-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+        background: #704d4e;
+        width: 100%;
+    }
+
+    #tag-wrapper .middle {
+        border-left: 1px solid #fff;
+        border-right: 1px solid #fff;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+        width: 92%;
+    }
+
 }
