@@ -29,12 +29,18 @@
         <div id="menutag">
             <div class="category">
                 <h3 class="ui header">通用</h3>
-                <div class="ui twelve column grid">
+                <div class="ui grid">
+                    <div class="doubling twelve column row">
                     {% for tag in tags %}
-                    <a href="/list/{{ tag.name }}/">
-                        <div class="column uu kaiti"><div class="tag">{{ tag.name }}</div></div>
-                    </a>
+                    <div class="column">
+                        <div class="tag uu kaiti">
+                            <a href="/list/{{ tag.name }}/">
+                                {{ tag.name }}
+                            </a>
+                        </div>
+                    </div>
                     {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
