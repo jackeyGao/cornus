@@ -23,4 +23,8 @@ def list_view(request, tag_name):
 
     return render_to_response('list.html', locals())
     
+
+def test(request):
+    tags = Tag.objects.all()
+    return render_to_response('test.html', locals())
     

@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from web.views import index, list_view
+from web.views import index, list_view, test
 
 urlpatterns = [
     url(r'^$', index),
+    url(r'^test/$', test),
     url(r'^list/(?P<tag_name>.*)/', list_view),
     url(r'^admin/', admin.site.urls),
 ]
