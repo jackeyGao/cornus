@@ -1,0 +1,199 @@
+{% extends "web/base.html" %}
+{% load params %}
+{% block title %}
+    {% if type == 'list' %}
+        {{ list.name }} | 茱萸
+    {% else %}
+        搜索「{{ raw_params.w }}」| 茱萸
+    {% endif %}
+{% endblock %}
+{% block head %}
+<style>
+.list-wrapper {
+    padding: 1em;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.list-wrapper .description {
+    margin-top: 1em;
+    padding: .5em;
+    font-size: 16px;
+    color: #fff;
+}
+
+.list-wrapper .cover {
+    width: 100%;
+    max-height: 75%;
+}
+
+.list-wrapper .avatar {
+    margin-top: -140px;
+    border: 2px solid orange;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.list-wrapper .owner {
+    margin-top: -35px;
+}
+
+.list-wrapper .owner span {
+    padding: 0.5em 1em;
+    color: #fff; 
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.search-wrapper {
+    padding: 1em;
+    height: 100%;
+    overflow: auto;
+}
+
+.search-wrapper .header {
+    color: #fff;
+    border-bottom: 1px solid #fff!important;
+}
+
+.search-wrapper .label {
+    border-radius: 0!important;
+    margin-bottom: 1em!important;
+}
+
+.right-BOX {
+    padding: 1em!important;
+}    
+
+.right-BOX .list .item {
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.right-BOX .list .image {
+    vertical-align: middle!important;
+}
+
+.right-BOX .list .content {
+    width: calc(100% - 110px);
+    vertical-align: middle!important;
+    height: 100px;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 767px) {
+    .right-BOX {
+        padding: 0!important;
+    }    
+}
+</style>
+{% endblock %}
+{% block left %}
+    <div class="left">
+        {% if type == 'list' %}
+            <div class="list-wrapper">
+                <img class="cover" src="{{ list.cover.url }}" />
+
+                <img class="avatar" src="{{ list.owner.profile.avatar.url }}"/>
+
+                <div class="owner kaiti">
+                    <span>@{{ list.owner.profile.nick }}</span>
+                </div>
+
+                <div class="description kaiti">
+                    {{ list.name }}
+                </div>
+
+
+            </div>
+        {% else %}
+            <div class="search-wrapper kaiti">
+                <h3 class="ui dividing header kaiti">已选的条件</h3>
+                {% if params.w %}
+                <a class="ui grey icon label"><i class="wikipedia w icon"></i>{{ raw_params.w }}</a>
+                {% endif %}
+                {% for d in raw_params.d%}
+                    <a href="?{% remove_render raw_params 'd' d %}" class="ui icon label">
+                        <i class="yellow stopwatch icon"></i>
+                        {{ d }}
+                        <i class="delete icon"></i>
+                    </a>
+                {% endfor %}
+                {% for tag in params.t%}
+                    <a href="?{% remove_render raw_params 't' tag.id %}" class="ui icon label">
+                        <i class="green tag icon"></i>
+                        {{ tag.name }}
+                        <i class="delete icon"></i>
+                    </a>
+                {% endfor %}
+                {% for author in params.a %}
+                    <a href="?{% remove_render raw_params 'a' author.id %}" class="ui image label">
+                        {% if author.avatar %}
+                        <img src="/upload/{{ author.avatar }}">
+                        {% else %}
+                        <img src="/upload/author_avatar/default.jpg">
+                        {% endif %}
+                        {{ author.name }}
+                        <i class="delete icon"></i>
+                    </a>
+                {% endfor %}
+                <h3 class="ui dividing header kaiti">待选的条件</h3>
+                {% for d in dynasty %}
+                    {% if d|stringformat:"s" in raw_params.d %}
+                    <a href="?{% append_render raw_params 'd' d %}" class="ui disabled icon label">
+                    {% else %}
+                    <a href="?{% append_render raw_params 'd' d %}" class="ui icon label">
+                    {% endif %}
+                        <i class="yellow stopwatch icon"></i>
+                        {{ d }}
+                    </a>
+                {% endfor %}
+                {% for t in tags %}
+                    {% if t.id|stringformat:"s" in raw_params.t %}
+                    <a href="?{% append_render raw_params 't' t.id %}" class="ui disabled icon label">
+                    {% else %}
+                    <a href="?{% append_render raw_params 't' t.id %}" class="ui icon label">
+                    {% endif %}
+                        <i class="green tag icon"></i>
+                        {{ t.name }}
+                    </a>
+                {% endfor %}
+                {% for author in authors %}
+                    {% if author.id|stringformat:"s" in raw_params.a %}
+                    <a href="?{% append_render raw_params 'a' author.id %}" class="ui image disabled label">
+                    {% else %}
+                    <a href="?{% append_render raw_params 'a' author.id %}" class="ui image label">
+                    {% endif %}
+                        {% if author.avatar %}
+                        <img src="/upload/{{ author.avatar }}">
+                        {% else %}
+                        <img src="/upload/author_avatar/default.jpg">
+                        {% endif %}
+                        {{ author.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div class="right-BOX">
+        {% for poetry in poetrys %}
+        <div class="ui very relaxed list">
+            <div class="item">
+                {% if poetry.author.avatar %}
+                <img class="ui image" style="height: 100px;" src="/upload/{{ poetry.author.avatar }}"/>
+                {% else %}
+                <img class="ui image" style="height: 100px;" src="/upload/author_avatar/default.jpg"/>
+                {% endif %}
+                <div class="content">
+                    <a href="/poetry/{{poetry.id}}/" class="kaiti">{{ poetry.author.name }} · {{ poetry.title }} · {{ poetry.dynasty }}</a>
+                    <div class="description kaiti">{{ poetry.content|linebreaks }}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

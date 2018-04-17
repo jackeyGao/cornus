@@ -1,0 +1,76 @@
+<style>
+
+#m #c .right-inner {
+    padding: 2em;
+}
+
+#m #c .right-inner .image {
+    border-radius: 0!important;
+    height: 30%;
+    min-height: 150px;
+}
+
+#m #c .right-inner .cover-image {
+    height: 100%;
+}
+
+#m #c .right-inner .user-count {
+    position: absolute; 
+    top: 1em; 
+    right: 1em;
+    color: #fff; 
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+    padding: 2px 10px
+}
+
+#m #c .right-inner .content {
+    font-size: 14px;
+}
+
+#m #c .right-inner .description img {
+    height:40px;
+    width: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+    #m #c .right-inner .image {
+        height: auto;
+    }
+
+    #m #c .right-inner .cover-image {
+        height: auto;
+    }
+}
+
+</style>
+
+<div class="right-inner">
+    <div class="ui grid" style="background: #fff; border-radius: 0; margin: -2em; margin-bottom: 1em;">
+        <div class="eight wide column">
+            <h3 class="ui grey header kaiti">我的诗集</h3>
+        </div>
+        <div class="right aligned eight wide column">
+            <a href="/me/?new=list"><div class="ui mini icon button orange"><i class="plus icon"></i></div></a>
+        </div>
+    </div>
+    <div class="ui grid">
+        <div class="ui four stackable cards">
+        {% for list in lists %}
+            <div class="ui card" style="border-radius: 0;">
+                <a class="image" href="/list/{{ list.id }}/">
+                    <div class="user-count">
+                        {{ list.poetrys.all|length }}
+                    </div>
+                    <img class="cover-image" src="{{ list.cover.url }}">
+                </a>
+                <div class="content">
+                    <div class="description">
+                       {{ list.name }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>

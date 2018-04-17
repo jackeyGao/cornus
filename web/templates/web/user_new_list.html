@@ -1,0 +1,69 @@
+<style>
+.edit-wrapper {
+    border: 0!important;
+    margin-top: 0!important;
+}
+
+.hidden-field {
+    display: none;
+}
+
+#upload-button {
+    width: 80%;
+}
+
+#upload-wrapper {
+    text-align: center;
+}
+
+#upload-wrapper img{
+    border: 2px solid #f2711c;
+    text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .edit-wrapper .grid > .six {
+        display: none!important;
+    }
+    .edit-wrapper {
+        padding: 1em!important;
+    }
+}
+</style>
+<div class="edit-wrapper ui segment" style="padding: 2em; background: rgba(255, 255, 255, 0.65);height: 100%;">
+    <a href="/me/"><i class="close icon" style="float: right; cursor: pointer;"></i></a>
+    <h3 class="ui grey header kaiti">编辑诗集</h3>
+    <div class="ui stackable grid">
+        <div class="ten wide column kaiti">
+            <form class="ui form" method="post" action="/list/" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="hidden-field field">
+                <label>用户</label>
+                <input class="kaiti" name="owner" type="text" value="{{ request.user.id }}">
+              </div>
+              <div class="field">
+                <label>诗集</label>
+                <input class="kaiti" name="name" type="text" value="{{ list.name }}">
+              </div>
+              <div class="field">
+                <label>描述</label>
+                <textarea class="kaiti" name="intro" rows="4">{{ list.intro }}</textarea>
+              </div>
+              <div class="field">
+                <label>封面</label>
+                <input id="cover-input" name="cover" type="file" />
+              </div>
+              <button class="ui basic orange button" type="submit">提交</button>
+            </form>
+        </div>
+        <div id="upload-wrapper" class="six wide column" style="text-align: center;">
+            {% if list.cover %}
+            <img id="blah" width="80%;" src="{{ list.cover.url }}"/>
+            {% else%}
+            <img id="blah" width="80%;" src="/upload/cover/default.jpeg"/>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+

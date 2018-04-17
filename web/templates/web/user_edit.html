@@ -1,0 +1,60 @@
+<style>
+.edit-wrapper {
+    border: 0!important;
+    margin-top: 0!important;
+}
+#upload-profile-picture {
+    display: none;
+}
+
+#upload-button {
+    width: 80%;
+}
+
+#upload-wrapper {
+    text-align: center;
+}
+#upload-wrapper img{
+    border: 2px solid #f2711c;
+    text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .edit-wrapper .grid > .six {
+        display: none!important;
+    }
+    .edit-wrapper {
+        padding: 1em!important;
+    }
+}
+</style>
+<div class="edit-wrapper ui segment" style="padding: 2em; background: rgba(255, 255, 255, 0.65);height: 100%;">
+    <a href="/me/"><i class="close icon" style="float: right; cursor: pointer;"></i></a>
+    <h3 class="ui grey header kaiti">编辑个人信息</h3>
+    <div class="ui stackable grid">
+        <div class="ten wide column kaiti">
+            <form class="ui form" method="post" action="/me/">
+              {% csrf_token %}
+              <div class="field">
+                <label>昵称</label>
+                <input class="kaiti" name="nick" type="text" value="{{ user.profile.nick }}">
+              </div>
+              <div class="field">
+                <label>介绍</label>
+                <textarea class="kaiti" name="bio" rows="4">{{user.profile.bio}}</textarea>
+              </div>
+              <button class="ui basic orange button" type="submit">提交</button>
+            </form>
+        </div>
+        <div id="upload-wrapper" class="six wide column" style="text-align: center;">
+            <img width="80%;" src="{{ user.profile.avatar.url }}"/>
+            <form id="upload-form" action="/me/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input name="avatar" id="upload-profile-picture" type="file">
+            </form>
+            <button id="upload-button" class="ui orange button">选择新头像</button>
+        </div>
+    </div>
+</div>
+
+

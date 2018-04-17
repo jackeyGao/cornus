@@ -25,7 +25,7 @@ SECRET_KEY = '6+h9fm^!=10s&y%wv1%tmrp867)2yas7@&e%5$u)e)xcs(98sx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['118.24.17.170', '127.0.0.1']
+ALLOWED_HOSTS = ['118.24.17.170', '127.0.0.1', 'x.shici.store']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'web.middlewares.ProfileMiddleware'
 ]
 
 ROOT_URLCONF = 'cornus.urls'
@@ -119,3 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/')
+MEDIA_URL = '/upload/'

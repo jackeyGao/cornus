@@ -1,0 +1,93 @@
+{% extends "web/base.html" %}
+{% block title %}关于 | 茱萸{% endblock %}
+{% block head %}
+<link href="/static/css/typo.css" rel="stylesheet">
+<style>
+.about-wrapper {
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+}
+
+.about-wrapper img {
+    width: 100%;
+    text-align: center;
+}
+
+.about-wrapper .name {
+    padding-top: 1em;
+    font-size: 20px;
+}
+
+.about-wrapper .name .city {
+    color: #ccc;
+    font-size: 16px;
+}
+
+.about-wrapper .intro {
+    padding: 1em;
+    color: #ccc;
+}
+
+.content-wrapper {
+    background: rgba(255, 255, 255, 0.65);
+    padding: 2em;
+    font-size: 16px;
+}
+</style>
+{% endblock %}
+{% block left %}
+    <div class="left">
+        <div class="about-wrapper">
+            <div class="author kaiti">
+                <img src="/static/images/avatar.png"/>
+                <div class="name kaiti">
+                    JackeyGao <i class="location icon"></i><span class="city">上海</i>
+                </div>
+                <div class="intro">
+                    人世一身霜雪，归来仍是少年。
+                </div>
+                <div id="social-links-wrapper" style="display: block;" class="topwrapper">
+                    <a href="https://jackeygao.io">
+                        <button class="ui orange circular icon button">
+                            <i class="rss square icon"></i>
+                        </button>
+                    </a>
+                    <a href="mailto:gaojunqi@outlook.com">
+                        <button class="ui red circular icon button">
+                            <i class="mail icon"></i>
+                        </button>
+                    </a>
+                    <a href="https://github.com/jackeygao">
+                        <button class="ui grey circular github icon button">
+                          <i class="github icon"></i>
+                        </button>
+                    </a>
+                    <a href="https://twitter.com/JackeyGaoo">
+                        <button class="ui circular twitter icon button">
+                          <i class="twitter icon"></i>
+                        </button>
+                    </a>
+                    <button onclick="toggleWechat()" class="ui green circular icon button">
+                        <i class="wechat icon"></i>
+                    </button>
+                    
+                    <div id="wx" style="display: none;">
+                        <img src="/assets/images/wx.jpeg">
+                    </div>
+                </div>
+                <div class="intro">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div class="right-BOX">
+        <div id="article" class="typo content-wrapper">
+            <p>『茱萸』出自中国唐代诗人王维的一首七言诗《九月九日忆山东兄弟》。 虽然茱萸只是一种植物科的名称，很多诗词都有出现， 让它成为一个很有诗意的名字。我是本站的开发者JackeyGao， 是github上<a href="https://github.com/chinese-poetry/chinese-poetry">chinese-poetry</a>的创建者和众多维护者之一。我的目标是让更多的人重拾诗词，让古人写的律诗和词能够在现代人生活中能够产生更多的共鸣。  </p>
+            <p>常来看看， 愿你举手投足都是诗。 看见一场雨，我希望你会想起野渡横舟，曲中折柳；想起对长亭晚，深巷杏花；想起山色空濛，水光潋滟；想起暮烟枫桥，垂下帘栊。看见湖光山色，就会想起高山寒树，猿啼无绝；想起阴晴众壑，绝巘怪柏；鹤汀凫渚，绛皓驳色；想起水光潋滟，烟雨楼台。 而不是，车要堵了， 我要迟到了。</p>
+        </div>
+    </div>
+{% endblock %}

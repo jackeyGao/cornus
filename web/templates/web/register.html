@@ -1,0 +1,192 @@
+{% extends "web/base.html" %}
+{% block title %}登录 | 茱萸{% endblock %}
+{% block head %}
+<style>
+#left {
+    background: #fff;
+    border-top: 1px solid #f3f3f4;
+}
+
+#left .login-wrapper {
+    padding: 1em 1em;
+    text-align: center;
+    height: 100%;
+}
+
+#left .login-wrapper img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+#left .login-wrapper .desc {
+    color: #ccc;
+    font-size: 20px;
+    padding: 2em;
+}
+
+#left .login-wrapper .mini {
+    padding: 0em 10em;
+}
+
+#left .login-wrapper .form .error.message {
+    background: rgba(0, 0, 0, 0);
+}
+
+#left .login-wrapper .input {
+    margin-bottom: 2em;
+}
+
+.left .today-image-wrapper .grid .six {
+    font-size: 30px;
+    color: #fff;
+}
+
+.left .today-image-wrapper .bottom {
+    height: auto;
+    padding: 1em;
+}
+
+.left .bottom .grid {
+    height: auto;
+}
+
+.left .bottom .today-date {
+    text-align: center;
+    padding: .5em 1em;
+    border: 1px solid #ccc;
+    color: #ccc;
+}
+
+.left .bottom .today-date:first-child {
+    border-bottom: 0;
+}
+
+@media only screen and (max-width: 767px) {
+    #m #c>.six {
+        padding: 0px!important;
+    }
+
+    #left .login-wrapper .login {
+        padding: 1em 5em;
+    }
+    
+    #m #c>.ten {
+        display: none;
+    }
+
+    #left .login-wrapper .mini {
+        padding: 0em 5em;
+    }
+}
+
+</style>
+{% endblock %}
+{% block left %}
+    <div id="left" class="left">
+        <div class="login-wrapper">
+            <img src="http://x.shici.store/upload/cover/2018/03/19/timg_3.jpeg" />
+            
+            <div class="desc kaiti">加入茱萸</div>
+            
+            <form class="ui form" method="post" action="/register/" style="margin-bottom: 0;">
+                <div class="ui error message"></div>
+                {% csrf_token %}
+                <div class="field mini">
+                    <div class="ui transparent fluid left icon input">
+                        <input class="kaiti" name="username" type="text" placeholder="用户名">
+                        <i class="user icon"></i>
+                    </div>
+                </div>
+                <div class="field mini">
+                <div class="ui transparent fluid left icon input">
+                    <input class="kaiti" name="email" type="text" placeholder="邮箱">
+                    <i class="mail icon"></i>
+                </div>
+                </div>
+                <div class="field mini">
+                <div class="ui transparent fluid left icon input">
+                    <input class="kaiti" name="password" type="password" placeholder="密码">
+                    <i class="lock icon"></i>
+                </div>
+                </div>
+                <div class="field mini">
+                <div class="ui transparent fluid left icon input">
+                    <input class="kaiti" name="c_password" type="password" placeholder="确认密码">
+                    <i class="lock icon"></i>
+                </div>
+                </div>
+                
+                <div class="mini">
+                    <button type="submit" class="ui fluid orange button">注册</button>
+                </div>
+            </form>
+            <div class="mini" style="padding-top: 1em;">
+                <a href="/login/"><button class="ui fluid orange basic button">登录</button></a>
+                {% if messages %}
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="ui {{ message.tags }} message"{% endif %}>{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div class="right-BOX kaiti" style="background: rgba(0, 0, 0, 0.25); font-size: 3em; color: #fff; padding: 1em;">
+        <table style="height: 100%; width: 100%;"><tr><td valign="middle" align="center" style="font-size: 3em; color: #fff;">遥知兄弟登高处，遍插茱萸少一人。</td></tr></table>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.bootcss.com/semantic-ui/2.3.0/components/form.min.js"></script>
+<script>
+$('.ui.form')
+  .form({
+    fields: {
+      username: {
+        identifier: 'username',
+        rules: [
+          {
+            type   : 'regExp[/^[a-z0-9A-Z_-]{4,16}$/]',
+            prompt : '请输入4-16位英文字符, 支持大小写_-'
+          }
+        ]
+      },
+      email: {
+        identifier: 'email',
+        rules: [
+          {
+            type   : 'email',
+            prompt : '请输入合法的Email'
+          }
+        ]
+      },
+      password: {
+        identifier: 'password',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请输入密码'
+          },
+          {
+            type   : 'minLength[6]',
+            prompt : '密码必须超过{ruleValue}个字符'
+          }
+        ]
+      },
+      c_password: {
+        identifier: 'c_password',
+        rules: [
+          {
+            type   : 'match[password]',
+            prompt : '两次密码不一致'
+          }
+        ]
+      }
+    }
+  })
+;
+</script>
+{% endblock %}

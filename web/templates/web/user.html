@@ -1,0 +1,116 @@
+{% extends "web/base.html" %}
+{% block title %}{{ user.profile.nick }} | 茱萸{% endblock %}
+{% block head %}
+<style>
+#left {
+    padding: 5em 0em;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    height: 100%;
+}
+
+#left img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+#left .user-wrapper {
+    text-align: center;
+}
+
+#left .user-wrapper .nick {
+    font-size: 20px;
+    color: #586069; 
+    padding: 1em;
+}
+
+#left .user-wrapper .name {
+    font-size: 16px;
+    color: #ccc;
+    margin-top: 1em;
+}
+
+#left .user-wrapper .intro {
+    font-size: 16px;
+    color: #586069;
+    padding: 0 1em;
+}
+
+@media only screen and (max-width: 767px) {
+    #m #c>.six {
+        padding: 0px!important;
+    }
+
+    #left .login-wrapper .login {
+        padding: 1em 5em;
+    }
+}
+
+</style>
+{% endblock %}
+{% block left %}
+    <div id="left" class="left">
+        <a href="?edit=1">
+            <div style="position: absolute; top: 1em; right: 1em;" class="ui basic orange mini icon button"><i class="edit icon"></i></div>
+        </a>
+        <div class="user-wrapper">
+            <img src="{{ user.profile.avatar.url }}" />
+
+            <div class="name">@{{ user.username }}</div>
+            
+            <div class="nick">{{ user.profile.nick }}</div>
+            {% if user.profile.bio %}
+                <div class="intro">{{ user.profile.bio }}</div>
+            {% else %}
+                <div class="intro">这里空空如也， 此人什么都没有留下.</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div class="right kaiti">
+        {% if is_edit %}
+            {% include "web/user_edit.html" %}
+        {% elif is_new %}
+            {% if is_new == 'list' %}
+                {% include "web/user_new_list.html" %}
+            {% endif %}
+        {% else %}
+            {% include "web/user_me.html" %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+$("#upload-button").click(function() {
+    $("#upload-profile-picture").click();
+});
+
+$("#upload-profile-picture").change(function(){
+    $('#upload-form').submit()
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$
+
+$("#cover-input").change(function(){
+    console.log(this.files)
+    readURL(this);
+});
+</script>
+{% endblock %}

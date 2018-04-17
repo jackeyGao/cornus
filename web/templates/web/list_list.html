@@ -1,0 +1,91 @@
+{% extends "web/base.html" %}
+{% block title %}主页 | 茱萸{% endblock %}
+{% block head %}
+<style>
+#m #c .right-inner .image {
+    border-radius: 0!important;
+    height: 30%;
+    min-height: 150px;
+}
+
+#m #c .right-inner .cover-image {
+    height: 100%;
+}
+
+#m #c .right-inner .user-count {
+    position: absolute; 
+    top: 1em; 
+    right: 1em;
+    color: #fff; 
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+    padding: 2px 10px
+}
+
+#m #c .right-inner .content {
+    padding: 0em 0em;
+    font-size: 14px;
+}
+
+#m #c .right-inner .description img {
+    height:40px;
+    width: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+    #m #c .right-inner .image {
+        height: auto;
+    }
+
+    #m #c .right-inner .cover-image {
+        height: auto;
+    }
+}
+
+</style>
+{% endblock %}
+{% block left %}
+    <div class="left">
+        <div class="today-wrapper" style="text-align: center;">
+            <div class="body uu kaiti" style="color: #f3f3f4;;">
+            燕子来时新社，<br/>梨花落后清明。<br/>池上碧苔三四点，<br/>叶底黄鹂一两声，<br/>日长飞絮轻。<br/>巧笑东邻女伴，<br/>采桑径里逢迎。<br/>疑怪昨宵春梦好，<br/>元是今朝斗草赢，<br/>笑从双脸生。
+                <div class="meta">
+                    <span class="title">破阵子· 晏殊</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div class="right-BOX">
+        <div class="right-inner">
+            <div class="ui grid">
+                <div class="ui four stackable cards" style="padding: 0;">
+                {% for list in list_list %}
+                    <div class="ui card" style="border-radius: 0;">
+                        <a class="image" href="/list/{{ list.id }}/">
+                            <div class="user-count">
+                                {{ list.poetrys.all|length }}
+                            </div>
+                            <img class="cover-image" src="{{ list.cover.url }}">
+                        </a>
+                        <div class="content">
+                            <div class="description">
+                                <table><tr>
+                                    <td valign="middle">
+                                        <img src="{{ list.owner.profile.avatar.url }}"/>
+                                    </td>
+                                    <td valign="middle">
+                                        {{ list.name }}
+                                    </td>
+                                </tr></table>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

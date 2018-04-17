@@ -1,0 +1,212 @@
+{% extends "web/base.html" %}
+{% block title %}{{ poetry.title }} | 茱萸{% endblock %}
+{% block head %}
+<style>
+.poetry-info-wrapper {
+    text-align: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    color: #fff;
+}
+
+.poetry-info-wrapper .author img {
+    height: 100px;
+    width: 100px;
+}
+
+.poetry-info-wrapper .author .name {
+    padding: 1em;
+    font-size: 16px;
+}
+
+.poetry-info-wrapper .author .intro {
+    text-align: left;
+    padding: 2em;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.p-wrapper {
+    background: rgba(255, 255, 255, 0.65);
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 5px;
+    padding: 2em 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.p-wrapper .title {
+    padding: 1em;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.p-wrapper .author {
+    color: #ccc;
+}
+
+.p-wrapper .body {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em 0em;
+}
+
+.p-wrapper .control-bar {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 40px;
+}
+
+.p-wrapper .control-bar .button {
+    margin: .5em;
+}
+
+.p-wrapper .tags {
+    text-align: left;
+}
+
+.p-wrapper .tag {
+    border-left: 3px solid #ccc;
+    padding: 0.2em 1em;
+    margin-bottom: 1em;
+    background: #f3f3f4;
+    display: inline-block;
+}
+
+.p-wrapper .tag:hover {
+    background: #bb1c33;
+    border-left: 3px solid #bb1c33;
+    color: #fff;
+}
+
+
+@media only screen and (max-width: 767px) {
+    #m #c .right-inner .image {
+        height: auto;
+    }
+
+    #m #c .right-inner .cover-image {
+        height: auto;
+    }
+
+    .p-wrapper .control-bar {
+        position: fixed;
+        right: 1em;;
+        bottom: 20%;
+        width: 40px;
+    }
+}
+
+</style>
+{% endblock %}
+{% block left %}
+    <div class="left">
+        <div class="poetry-info-wrapper">
+            <div class="author kaiti">
+                <img src="/upload/{{ poetry.author.avatar }}"/>
+                <div class="name">
+                    {{ poetry.author.name }}
+                </div>
+                <div class="intro">
+                    {{ poetry.author.intro }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right %}
+    <div class="ui tiny modal">
+        <i class="close icon"></i>
+        <div class="header kaiti">
+            诗集管理
+        </div>
+        <div class="content">
+            <div class="ui selection list" style="height: 300px; overflow: auto;">
+                {% for l in lists %}
+                <div class="item">
+                    <div class="right floated content">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input style="display: none;" name="list" value="{{ l.id }}" />
+                            {% if poetry in l.poetrys.all %}
+                            <input style="display: none;" name="action" value="remove" />
+                            <button type="submit" class="ui icon mini basic green button"><i class="remove icon"></i></button>
+                            {% else %}
+                            <input style="display: none;" name="action" value="add" />
+                            <button type="submit" class="ui icon mini basic orange button"><i class="plus icon"></i></button>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <img width="40px" height="40px" class="ui image" src="{{ l.cover.url }}">
+                    <div class="content" style="line-height: 40px;">
+                        {{ l.name }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="actions">
+          <div class="ui cancel orange basic kaiti button">关闭</div>
+        </div>
+    </div>
+    <div class="right-BOX">
+        <div class="p-wrapper" style="text-align: center;">
+            {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="ui {{ message.tags }} transition message kaiti"{% endif %} style="width: 50%; border-radius: 0; margin-left: auto; margin-right: auto;">
+                   <i class="close icon"></i>
+                   <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <div class="control-bar">
+                <div onclick="toggleText()" class="ui icon orange circular button"><i class="text width icon"></i></div>
+                <div onclick="openManager()" class="ui icon green circular button"><i class="plus icon"></i></div>
+            </div>
+            <div class="title kaiti">{{ poetry.title }}</div>
+            <div class="author kaiti">{{ poetry.dynasty }} {{ poetry.author}}</div>
+            <div class="body kaiti">
+                <div class="body-inner" style="max-width: 100%; overflow: auto;">
+                {{ poetry.content|linebreaks }}
+                </div>
+            </div>
+            
+            <div class="tags kaiti">
+            {% for tag in poetry.tags.all %}
+                <a href="/search/?t={{ tag.id }}"><div class="tag">{{ tag.name }}</div></a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.bootcss.com/semantic-ui/2.3.0/components/modal.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.3.1/components/dimmer.min.js"></script>
+<script>
+function openManager() {
+    $('.ui.modal').modal('show');
+}
+
+function toggleText() {
+    $('.p-wrapper .body').toggleClass('uu');
+    $('.p-wrapper .text.icon').toggleClass('width');
+    $('.p-wrapper .text.icon').toggleClass('height');
+}
+
+$('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
+;
+</script>
+{% endblock %}
+
+

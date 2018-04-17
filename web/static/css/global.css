@@ -87,6 +87,7 @@ body ::-webkit-scrollbar {
 }
 
 .uu {
+    text-align: start;
     writing-mode: vertical-rl;
     -moz-writing-mode: vertical-rl;
     -webkit-writing-mode: vertical-rl;

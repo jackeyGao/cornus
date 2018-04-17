@@ -1,0 +1,268 @@
+<html>
+    <head>
+        <title>{% block title %}茱萸{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/semantic.min.css" rel="stylesheet">
+        <link href="/static/css/global.css" rel="stylesheet">
+        {% block head %}{% endblock %}
+        <style>
+        .widget {
+            display: block;
+        }
+        .kaiti {
+            font-family: "STKaiti","KaiTi","Microsoft YaHei","微软雅黑",Arial,sans-serif!important;
+        }
+        #app-wrapper {
+            height: 100%;
+            padding: 0em 10em;
+        }
+
+        #header, #footer {
+            height: 8%;
+        }
+
+        #m {
+            height: 84%;
+            width: 100%;
+            border: 1px solid #f4f4f4;
+        }
+
+        #m .menu {
+            width: 100%;
+            height: 8%;
+            padding-bottom: 0;
+        }
+
+        #m .menu .menu-table {
+            padding: 0 1em;
+            height: 100%;
+        }
+
+        #m .menu table {
+            width: 100%;
+            height: 100%;
+        }
+
+        #m .menu .logo {
+            position: relative;
+            padding: 0.4em 2em;
+            color: #fff;
+            background-color: #000;
+            width: 100px;
+        }
+        
+        #m .menu .logo:hover {
+            background: #bb1c33;
+        }
+
+        #m .menu .input {
+            padding-left: 5px;
+            border-left: 3px solid #f3f3f4;
+        }
+
+        #m #c {
+            margin: 0;
+            height: 92%;
+        }
+
+        #m #c > .column {
+            padding: 0;
+        }
+
+        #m #c>.six {
+            background: #bb1c33;
+            background-image: url('/static/images/bg.png');
+        }
+
+        #m #c>.left {
+            height: 100%;
+            overflow: auto;
+        }
+
+        #m #c .right-BOX {
+            height: 100%;
+            overflow: auto;
+            padding: 0em;
+            padding-left: 0em;
+            border-top: 1px solid #ccc;
+        }
+
+        #m #c .right-inner {
+            height: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 2em;
+        }
+
+        #m #c .right-inner .tag {
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+            padding: 2em .8em;
+            border: 1px solid #f3f3f4;
+            min-height: 100px;
+            text-align: center;
+        }
+
+        #m #c .right-inner .tag:hover {
+            background-color: #704d4e;
+            color: #fff;
+        }
+
+        #m #c .right-inner .card {
+            background: rgba(255, 255, 255, 0.62);
+        }
+
+        .today-wrapper .body {
+            font-size: 16px;
+            letter-spacing: 5px;
+        }
+        
+        #dropdown .menu .item {
+            background: #fff!important;
+            width: 200px;
+        }
+
+        #dropdown .menu .avatar-wrapper {
+            width: 200px;
+            padding: 1em;
+            background: #fff;
+            text-align: center;
+        }
+
+        #dropdown .menu .avatar-wrapper img {
+            height: 90px;
+            width: 90px;
+            border-radius: 50%;
+        }
+
+        #dropdown .menu .avatar-wrapper .name {
+            color: #ccc;
+            padding: .5em 0em;
+        }
+
+        @media only screen and (max-width: 767px) {
+            #app-wrapper {
+                height: 100%;
+                padding: 0em 0em;
+            }
+
+            #header, #footer {
+                height: 0%;
+            }
+
+            #m {
+                height: 100%;
+                width: 100%;
+                border: 1px solid #f4f4f4;
+            }
+
+            #m .menu {
+                width: 100%;
+                padding-bottom: 0;
+            }
+            .widget {
+                display: none;
+            }
+            #m #c>.left {
+                height: auto;
+                overflow: auto;
+            }
+            #m #c .right-BOX {
+                height: auto;
+                border-top: 0;
+            }
+            #m #c .right-inner {
+                height: auto;
+                overflow-y: hidden;
+                padding: 2em;
+            }
+            #m #c .right-inner .cards .card {
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%!important;
+            }
+            .today-wrapper .body {
+                width: auto;
+            }
+            
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app-wrapper">
+            <img class="widget" style="position: fixed; right: 0; top: 0;" src="/static/images/ying.png"/>
+            <img class="widget" style="position: fixed; left: 0; top: 110; z-index: 1;" src="/static/images/top.png"/>
+            <img class="widget" style="position: fixed; left: 0; top: 180; z-index: 1;" src="/static/images/top.png"/>
+            <div id="header"></div>
+            <div id="m" style="background-color: #fff;">
+                <div class="menu">
+                    <div class="menu-table">
+                        <table><tr>
+                            <td valign="middle" width="30%">
+                                <div class="ui text menu" style="margin: 0;">
+                                    <div id="dropdown" class="ui left dropdown kaiti item">
+                                        {% if request.user.is_authenticated %}
+                                            <b>{{ request.user.profile.nick }}</b>
+                                        {% else %}
+                                            <b>你好</b>
+                                        {% endif %}
+                                        <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                            {% if request.user.is_authenticated %}
+                                            <div class="avatar-wrapper">
+                                                <img src="{{ request.user.profile.avatar.url }}"/>
+                                                <div class="name">@{{ request.user.username }}</div>
+                                            </div>
+                                            <a href="/me/" class="item"><i class="user icon"></i>{{ request.user.profile.nick }}</a>
+                                            {% endif %}
+                                            <a href="/about/" class="item"><i class="list icon"></i>关于</a>
+                                            <a href="https://jackeygao.io/donation.html" class="item"><i class="red heart icon"></i>捐助本站</a>
+                                            {% if request.user.is_authenticated %}
+                                                <a href="/logout/" class="item"><i class="sign out alternate icon"></i>登出</a>
+                                            {% else %}
+                                                <a href="/login/" class="item"><i class="sign in alternate icon"></i>登入</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td valign="middle" align="center" width="40%">
+                                <a href="/" class="logo kaiti">
+                                    茱萸
+                                <a>
+                            </td>
+                            <td valign="middle" width="30%">
+                                <form class="ui from" method="get" action="/search/" style="margin-bottom: 0;">
+                                    <div class="ui fluid transparent icon input">
+                                        <input class="kaiti" name="w" type="text" placeholder="搜 索 . . ." value="{{ params.w }}">
+                                        <i class="search icon"></i>
+                                        <input type="submit" style="position: absolute; left: -9999px"/>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr></table>
+                    </div>
+                </div>
+                <div id="c" class="ui stackable grid">
+                    <div class="six wide column">
+                        {% block left %}{% endblock %}
+                    </div>
+                    <div class="ten wide column">
+                        {% block right %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            <div id="footer"></div>
+        </div>
+    </body>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.3.1/components/transition.min.js"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.3.0/components/dropdown.min.js"></script>
+    {% block script %}{% endblock %}
+    <script>
+    $( document ).ready(function() {
+        $('#dropdown').dropdown()
+    });
+    </script>
+</html>
