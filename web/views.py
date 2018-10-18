@@ -156,7 +156,8 @@ class PoetryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(PoetryDetailView, self).get_context_data(**kwargs)
         context["poetry"] = auto_content(context["poetry"])
-        context["lists"] = List.objects.filter(owner=self.request.user)
+        if self.request.user.is_authenticated:
+            context["lists"] = List.objects.filter(owner=self.request.user)
         return context
 
 
