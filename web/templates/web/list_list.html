@@ -9,7 +9,15 @@
 }
 
 #m #c .right-inner .cover-image {
+    border-radius: 0!important;
     height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-color: #fff;
+    border-radius: .3rem;
+    background-image: url(/user/images/shortcut.svg);
+    box-shadow: 0 0 1px grey;
 }
 
 #m #c .right-inner .user-count {
@@ -68,7 +76,8 @@
                             <div class="user-count">
                                 {{ list.poetrys.all|length }}
                             </div>
-                            <img class="cover-image" src="{{ list.cover.url }}">
+                            <div class="cover-image" style="background-image: url({{ list.cover.url }});">
+                            </div>
                         </a>
                         <div class="content">
                             <div class="description">
