@@ -188,7 +188,7 @@
                 {% else %}
                 <img class="ui image" style="height: 100px;" src="/upload/author_avatar/default.jpg"/>
                 {% endif %}
-                <div class="content">
+                <div class="content" style="width: calc(100% - 105px);">
                     <a href="/poetry/{{poetry.id}}/" class="kaiti">{{ poetry.author.name }} · {{ poetry.title }} · {{ poetry.dynasty }}</a>
                     <div class="description kaiti">{{ poetry.content|linebreaks }}</div>
                 </div>
